@@ -1,5 +1,6 @@
 import json
 import os 
+from tabulate import tabulate
 
 TASK_FILE = 'db.json'
 
@@ -21,9 +22,12 @@ def list_task():
         print("No tasks found.")
         return
 
-    for index, task in enumerate(tasks, start=1):
+    table = []
+    for i, task in enumerate(tasks, start=1):
         status = "✓" if task["completed"] else "✗"
-        print(f"{index}. {task['task']} - {status}")
+        table.append([i, task["task"], status])
+
+    print(tabulate(table, headers=["#", "Task", "Done"], tablefmt="grid"))
 
 def clear_task():
     tasks = load_tasks()

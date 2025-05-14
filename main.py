@@ -1,5 +1,6 @@
 import argparse
 from utils import *
+from datetime import datetime
 
 tasks = load_tasks()
 
@@ -27,7 +28,7 @@ def main():
 
     if args.command == 'add':
         task_text = " ".join(args.add)
-        tasks.append({ "task": task_text, "completed": False })
+        tasks.append({ "task": task_text, "completed": False, "date_added": datetime.now().strftime("%Y-%m-%d %H:%M:%S") })
         save_tasks(tasks)
         print(f"Task added: {task_text}")
     elif args.command == 'list':
